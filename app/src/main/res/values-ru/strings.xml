@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Угадай число</string>
+    <string name="show_msg_label">Угадай!</string>
+    <string name="show_hint_label">Подсказка: задумано двузначное число.</string>
+    <string name="show_hint_greater_label">Подсказка: задуманное число больше.</string>
+    <string name="show_hint_less_label">Подсказка: задуманное число меньше.</string>
+    <string name="show_attempts_left_label">Осталось попыток:</string>
+    <string name="btn_guess_label">Угадать</string>
+    <string name="btn_restart_label">Заново</string>
+    <string name="et_edit_num_label">Введите число</string>
+    <string name="btn_guessed_label">Угадано</string>
+    <string name="btn_not_guessed_label">Не угадано</string>
+    <string name="t_congratulation_label">ПОЗДРАВЛЯЮ!</string>
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Guess The Number</string>
+    <string name="show_msg_label">Guess!</string>
+    <string name="show_hint_label">Hint: guessed two-digit number.</string>
+    <string name="show_hint_greater_label">Hint: hidden number is greater.</string>
+    <string name="show_hint_less_label">Hint: hidden number is less.</string>
+    <string name="show_attempts_left_label">Attempts left:</string>
+    <string name="btn_guess_label">Guess</string>
+    <string name="btn_restart_label">Restart</string>
+    <string name="et_edit_num_label">Enter the number</string>
+    <string name="btn_guessed_label">Guessed</string>
+    <string name="btn_not_guessed_label">Not guessed</string>
+    <string name="t_congratulation_label">CONGRATULATION!</string>
+</resources>
