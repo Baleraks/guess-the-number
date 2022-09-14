@@ -40,7 +40,8 @@
         android:hint="@string/et_edit_num_label"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#757575" />
+        android:textColorHint="#757575"
+        android:maxLength="2"/>
 
     <Button
         android:id="@+id/btn_guess"
