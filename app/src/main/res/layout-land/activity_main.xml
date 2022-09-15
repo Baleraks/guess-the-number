@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/show_msg_label"
         android:textAlignment="textEnd"
         android:textColor="#AA00FF"
@@ -25,6 +26,7 @@
         android:layout_width="712dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/show_hint_label"
         android:textAlignment="viewEnd"
         android:textColor="#304FFE"
@@ -35,6 +37,7 @@
         android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/show_attempts_left_label"
         android:textAlignment="viewEnd"
         android:textColor="#BF360C"
@@ -47,11 +50,12 @@
         android:layout_marginEnd="10dp"
         android:autofillHints=""
         android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/et_edit_num_label"
         android:inputType="number"
         android:minHeight="48dp"
         android:textAlignment="textEnd"
-        android:textColorHint="#757575" />
+        android:textColorHint="#455A64" />
 
     <Button
         android:id="@+id/btn_guess"
