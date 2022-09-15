@@ -14,19 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@android:dimen/thumbnail_height"
-        android:fontFamily="sans-serif-black"
         android:text="@string/show_msg_label"
         android:textAlignment="center"
-        android:textColor="#9FA8DA"
-        android:textSize="28sp"
-        tools:ignore="TextContrastCheck" />
+        android:textColor="#00B8D4"
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/show_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:fontFamily="sans-serif-black"
         android:text="@string/show_hint_label"
         android:textAlignment="center"
         android:textColor="#64DD17"
@@ -60,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_margin="5dp"
-        android:backgroundTint="#000000"
+        android:backgroundTint="#555555"
         android:text="@string/btn_guess_label"
         app:rippleColor="#7E7E7E" />
 
@@ -69,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_margin="5dp"
-        android:backgroundTint="#000000"
+        android:backgroundTint="#555555"
         android:text="@string/btn_restart_label" />
 
 </LinearLayout>
