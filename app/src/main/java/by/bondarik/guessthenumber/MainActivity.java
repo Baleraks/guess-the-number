@@ -91,8 +91,4 @@ public class MainActivity extends AppCompatActivity {
         btnGuess.setOnClickListener(clickGuess);
         btnRestart.setOnClickListener(clickRestart);
     }
-
-    public void editNumClick(View view) {
-        editNum.selectAll();
-    }
 }
