@@ -52,6 +52,7 @@
         android:hint="@string/et_edit_num_label"
         android:inputType="number"
         android:minHeight="48dp"
+        android:selectAllOnFocus="true"
         android:textAlignment="textEnd"
         android:textColorHint="#757575" />
 

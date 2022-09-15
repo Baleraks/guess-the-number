@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         hiddenNumber = NumberGenerator.generate(10, 99);
 
+        View.OnClickListener editNumFocus = view -> editNum.selectAll();
+
         View.OnClickListener clickGuess = view -> {
             try {
                 int inputNumber = Integer.parseInt(editNum.getText().toString());
@@ -82,10 +84,15 @@ public class MainActivity extends AppCompatActivity {
 
             hiddenNumber = NumberGenerator.generate(10, 99);
 
-            if (!btnGuess.isEnabled()) btnGuess.setEnabled(true);
+            btnGuess.setEnabled(true);
         };
 
+        editNum.setOnClickListener(editNumFocus);
         btnGuess.setOnClickListener(clickGuess);
         btnRestart.setOnClickListener(clickRestart);
+    }
+
+    public void editNumClick(View view) {
+        editNum.selectAll();
     }
 }
