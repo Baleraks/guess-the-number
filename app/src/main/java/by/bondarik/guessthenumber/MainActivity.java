@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnGuess;
     private Button btnRestart;
-    private Button btnSettings;
 
     private int hiddenNumber;
 
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         editNum = findViewById(R.id.edit_num);
         btnGuess = findViewById(R.id.btn_guess);
         btnRestart = findViewById(R.id.btn_restart);
-        btnSettings = findViewById(R.id.btn_settings);
+        Button btnSettings = findViewById(R.id.btn_settings);
 
         currentAttempts = maxAttempts;
 
