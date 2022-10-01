@@ -2,7 +2,9 @@ package by.bondarik.guessthenumber;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnGuess;
     private Button btnRestart;
+    private Button btnSettings;
 
     private int hiddenNumber;
 
-    private static final int MAX_ATTEMPTS = 5;
+    private static int maxAttempts = 5;
+    private static int minNumber = 10;
+    private static int maxNumber = 99;
+
     private int currentAttempts;
 
     @Override
@@ -32,12 +38,13 @@ public class MainActivity extends AppCompatActivity {
         showHint = findViewById(R.id.show_hint);
         showAttemptsLeft = findViewById(R.id.show_attempts_left);
         showAttemptsLeft.append(" ");
-        showAttemptsLeft.append(Integer.toString(MAX_ATTEMPTS));
+        showAttemptsLeft.append(Integer.toString(maxAttempts));
         editNum = findViewById(R.id.edit_num);
         btnGuess = findViewById(R.id.btn_guess);
         btnRestart = findViewById(R.id.btn_restart);
+        btnSettings = findViewById(R.id.btn_settings);
 
-        currentAttempts = MAX_ATTEMPTS;
+        currentAttempts = maxAttempts;
 
         hiddenNumber = NumberGenerator.generate(10, 99);
 
@@ -77,18 +84,52 @@ public class MainActivity extends AppCompatActivity {
 
             showAttemptsLeft.setText((R.string.show_attempts_left_label));
             showAttemptsLeft.append(" ");
-            showAttemptsLeft.append(Integer.toString(MAX_ATTEMPTS));
-            currentAttempts = MAX_ATTEMPTS;
+            showAttemptsLeft.append(Integer.toString(maxAttempts));
+            currentAttempts = maxAttempts;
 
             btnGuess.setText(R.string.btn_guess_label);
 
-            hiddenNumber = NumberGenerator.generate(10, 99);
+            hiddenNumber = NumberGenerator.generate(minNumber, maxNumber);
 
             btnGuess.setEnabled(true);
+        };
+
+        View.OnClickListener clickSettings = view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(R.string.ab_settings);
+
+            builder.setNegativeButton(R.string.ab_btn_cancel, (dialog, id) -> { });
+
+            builder.setItems(R.array.diaps_array, (dialog, which) -> {
+                switch (which) {
+                    case 0:
+                        maxAttempts = 5;
+                        minNumber = 10;
+                        maxNumber = 99;
+                        break;
+                    case 1:
+                        maxAttempts = 7;
+                        minNumber = 100;
+                        maxNumber = 999;
+                        break;
+                    case 2:
+                        maxAttempts = 10;
+                        minNumber = 1000;
+                        maxNumber = 9999;
+                        break;
+                }
+
+                btnRestart.performClick();
+            });
+
+            builder.create();
+            builder.show();
         };
 
         editNum.setOnClickListener(editNumFocus);
         btnGuess.setOnClickListener(clickGuess);
         btnRestart.setOnClickListener(clickRestart);
+        btnSettings.setOnClickListener(clickSettings);
     }
 }
