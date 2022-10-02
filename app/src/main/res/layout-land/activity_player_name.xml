@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PlayerNameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PlayerNameActivity">
+
+        <EditText
+            android:id="@+id/et_player_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@android:dimen/thumbnail_height"
+            android:ems="10"
+            android:hint="@string/et_edit_label"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="@string/et_edit_label"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ab_btn_ok" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_player_name3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@android:dimen/thumbnail_height"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="@string/et_edit_label"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/btn_ok3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ab_btn_ok" />
+</LinearLayout>

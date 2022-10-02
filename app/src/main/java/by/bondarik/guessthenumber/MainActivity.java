@@ -1,6 +1,10 @@
 package by.bondarik.guessthenumber;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView showHint;
     private TextView showAttemptsLeft;
+    private TextView showPlayerName;
 
     private EditText editNum;
 
@@ -25,11 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     private int hiddenNumber;
 
-    private static int maxAttempts = 5;
-    private static int minNumber = 10;
-    private static int maxNumber = 99;
+    private int maxAttempts = 5;
+    private int minNumber = 10;
+    private int maxNumber = 99;
 
     private int currentAttempts;
+
+    private String currentPlayerName = "Super player";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         showAttemptsLeft = findViewById(R.id.show_attempts_left);
         showAttemptsLeft.append(" ");
         showAttemptsLeft.append(Integer.toString(maxAttempts));
+
+        showPlayerName = findViewById(R.id.show_player_name);
+        showPlayerName.append(" ");
+        showPlayerName.append(currentPlayerName);
+
         editNum = findViewById(R.id.edit_num);
         btnGuess = findViewById(R.id.btn_guess);
         btnRestart = findViewById(R.id.btn_restart);
@@ -48,6 +60,23 @@ public class MainActivity extends AppCompatActivity {
         currentAttempts = maxAttempts;
 
         hiddenNumber = NumberGenerator.generate(10, 99);
+
+        ActivityResultLauncher<Intent> playerNameActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        if (result.getData() != null) {
+                            currentPlayerName = result.getData().getStringExtra("player_name");
+                            showPlayerName.setText(R.string.show_player_name_label);
+                            showPlayerName.append(" ");
+                            showPlayerName.append(currentPlayerName);
+                        }
+                    }
+                });
+
+        View.OnClickListener clickPlayerName = view -> {
+            Intent playerNameActivityIntent = new Intent(this, PlayerNameActivity.class);
+            playerNameActivityResultLauncher.launch(playerNameActivityIntent);
+        };
 
         View.OnClickListener editNumFocus = view -> editNum.selectAll();
 
@@ -132,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
             builder.show();
         };
 
+        showPlayerName.setOnClickListener(clickPlayerName);
         editNum.setOnClickListener(editNumFocus);
         btnGuess.setOnClickListener(clickGuess);
         btnRestart.setOnClickListener(clickRestart);
