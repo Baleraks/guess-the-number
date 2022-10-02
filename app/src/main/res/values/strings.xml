@@ -7,7 +7,7 @@
     <string name="show_attempts_left_label">Attempts left:</string>
     <string name="btn_guess_label">Guess</string>
     <string name="btn_restart_label">Restart</string>
-    <string name="et_edit_num_label">Enter the number</string>
+    <string name="et_edit_label">Enter</string>
     <string name="btn_guessed_label">Guessed</string>
     <string name="btn_not_guessed_label">Not guessed</string>
     <string name="btn_settings_label">Settings</string>
@@ -18,4 +18,5 @@
     <string name="ab_item_2">2-digits</string>
     <string name="ab_item_3">3-digits</string>
     <string name="ab_item_4">4-digits</string>
+    <string name="show_player_name_label">Player:</string>
 </resources>

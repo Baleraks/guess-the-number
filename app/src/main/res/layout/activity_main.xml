@@ -10,6 +10,14 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/show_player_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_player_name_label"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF" />
+
+    <TextView
         android:id="@+id/show_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +56,7 @@
         android:layout_marginStart="5dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/et_edit_num_label"
+        android:hint="@string/et_edit_label"
         android:inputType="number"
         android:minHeight="48dp"
         android:selectAllOnFocus="true"
