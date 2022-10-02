@@ -70,4 +70,11 @@
         android:layout_marginEnd="10dp"
         android:text="@string/btn_restart_label" />
 
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="272dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/btn_settings_label" />
+
 </LinearLayout>
