@@ -1,14 +1,17 @@
 package by.bondarik.guessthenumber;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast tCongratulation = Toast.makeText(this, R.string.t_congratulation_label, Toast.LENGTH_LONG);
                     tCongratulation.show();
+
+                    sendEndGameResult(true);
                 }
                 else {
                     showHint.setText(inputNumber > hiddenNumber ? R.string.show_hint_less_label : R.string.show_hint_greater_label);
@@ -70,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     if (currentAttempts == 0) {
                         btnGuess.setText(R.string.btn_not_guessed_label);
                         btnGuess.setEnabled(false);
+
+                        sendEndGameResult(false);
                     }
                 }
             } catch (Exception e) {
@@ -129,5 +136,37 @@ public class MainActivity extends AppCompatActivity {
         btnGuess.setOnClickListener(clickGuess);
         btnRestart.setOnClickListener(clickRestart);
         btnSettings.setOnClickListener(clickSettings);
+    }
+
+    private void sendEndGameResult(boolean isGuessed) {
+        StringBuilder endGameResultBuilder = new StringBuilder();
+
+        endGameResultBuilder.append("Date: ");
+        endGameResultBuilder.append(new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault()).format(new Date()));
+
+        if (isGuessed) {
+            endGameResultBuilder.append("\nAttempt number: ");
+            endGameResultBuilder.append(maxAttempts - currentAttempts + 1);
+        }
+
+        endGameResultBuilder.append("\nNumber: ");
+        endGameResultBuilder.append(hiddenNumber);
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.setPackage("com.miui.notes");
+
+        sendIntent.putExtra(Intent.EXTRA_TEXT, endGameResultBuilder.toString());
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+
+        /*sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, endGameResultBuilder.toString());
+        sendIntent.setType("text/plain");
+
+        shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);*/
     }
 }
