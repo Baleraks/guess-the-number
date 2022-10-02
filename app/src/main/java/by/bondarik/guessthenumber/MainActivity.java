@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -73,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        View.OnClickListener clickPlayerName = view -> {
+        showPlayerName.setOnClickListener(v -> {
             Intent playerNameActivityIntent = new Intent(this, PlayerNameActivity.class);
             playerNameActivityResultLauncher.launch(playerNameActivityIntent);
-        };
+        });
 
-        View.OnClickListener editNumFocus = view -> editNum.selectAll();
+        editNum.setOnClickListener(v -> editNum.selectAll());
 
-        View.OnClickListener clickGuess = view -> {
+        btnGuess.setOnClickListener(v -> {
             try {
                 int inputNumber = Integer.parseInt(editNum.getText().toString());
 
@@ -111,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        };
+        });
 
-        View.OnClickListener clickRestart = view -> {
+        btnRestart.setOnClickListener(v -> {
             showHint.setText(R.string.show_hint_label);
 
             showAttemptsLeft.setText((R.string.show_attempts_left_label));
@@ -126,9 +125,9 @@ public class MainActivity extends AppCompatActivity {
             hiddenNumber = NumberGenerator.generate(minNumber, maxNumber);
 
             btnGuess.setEnabled(true);
-        };
+        });
 
-        View.OnClickListener clickSettings = view -> {
+        btnSettings.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             builder.setTitle(R.string.ab_settings);
@@ -159,13 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
             builder.create();
             builder.show();
-        };
-
-        showPlayerName.setOnClickListener(clickPlayerName);
-        editNum.setOnClickListener(editNumFocus);
-        btnGuess.setOnClickListener(clickGuess);
-        btnRestart.setOnClickListener(clickRestart);
-        btnSettings.setOnClickListener(clickSettings);
+        });
     }
 
     private void sendEndGameResult(boolean isGuessed) {
@@ -192,11 +185,11 @@ public class MainActivity extends AppCompatActivity {
         Intent shareIntent = Intent.createChooser(sendIntent, null);
         startActivity(shareIntent);
 
-        /*sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, endGameResultBuilder.toString());
         sendIntent.setType("text/plain");
 
         shareIntent = Intent.createChooser(sendIntent, null);
-        startActivity(shareIntent);*/
+        startActivity(shareIntent);
     }
 }
