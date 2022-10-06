@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Угадай число</string>
     <string name="show_msg_label">Угадай!</string>
-    <string name="show_hint_label">Подсказка: задумано число.</string>
+    <string name="show_hint_label">Подсказка: задумано число c количеством цифр</string>
     <string name="show_hint_greater_label">Подсказка: задуманное число больше.</string>
     <string name="show_hint_less_label">Подсказка: задуманное число меньше.</string>
     <string name="show_attempts_left_label">Осталось попыток:</string>

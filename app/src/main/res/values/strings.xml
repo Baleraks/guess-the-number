@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Guess The Number</string>
     <string name="show_msg_label">Guess!</string>
-    <string name="show_hint_label">Hint: guessed number.</string>
+    <string name="show_hint_label">Hint: guessed number with numbers count of</string>
     <string name="show_hint_greater_label">Hint: hidden number is greater.</string>
     <string name="show_hint_less_label">Hint: hidden number is less.</string>
     <string name="show_attempts_left_label">Attempts left:</string>

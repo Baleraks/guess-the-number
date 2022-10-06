@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         showHint = findViewById(R.id.show_hint);
+        showHint.append(" ");
+        showHint.append(Integer.toString(2));
+
         showAttemptsLeft = findViewById(R.id.show_attempts_left);
         showAttemptsLeft.append(" ");
         showAttemptsLeft.append(Integer.toString(maxAttempts));
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         editNum.setOnClickListener(v -> editNum.selectAll());
 
         btnGuess.setOnClickListener(v -> {
+            editNum.selectAll();
             try {
                 int inputNumber = Integer.parseInt(editNum.getText().toString());
 
@@ -154,10 +158,15 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 btnRestart.performClick();
+
+                showHint.setText(R.string.show_hint_label);
+                showHint.append(" ");
+                showHint.append(Integer.toString(which + 2));
             });
 
             builder.create();
             builder.show();
+            editNum.setText("");
         });
     }
 

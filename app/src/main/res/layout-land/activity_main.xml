@@ -22,7 +22,7 @@
         android:id="@+id/show_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/show_msg_label"
         android:textAlignment="textEnd"
@@ -67,21 +67,21 @@
     <Button
         android:id="@+id/btn_guess"
         android:layout_width="272dp"
-        android:layout_height="64dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="10dp"
         android:text="@string/btn_guess_label" />
 
     <Button
         android:id="@+id/btn_restart"
         android:layout_width="272dp"
-        android:layout_height="64dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="10dp"
         android:text="@string/btn_restart_label" />
 
     <Button
         android:id="@+id/btn_settings"
         android:layout_width="272dp"
-        android:layout_height="64dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="10dp"
         android:text="@string/btn_settings_label" />
 
