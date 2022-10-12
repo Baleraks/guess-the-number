@@ -2,12 +2,17 @@ package by.bondarik.guessthenumber;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,39 +34,46 @@ public class MainActivity extends AppCompatActivity {
 
     private int hiddenNumber;
 
+    private int currentDifficulty;
+
     private int maxAttempts = 5;
     private int minNumber = 10;
     private int maxNumber = 99;
 
     private int currentAttempts;
+    private String currentHint;
 
     private String currentPlayerName = "Super player";
 
-    @Override
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(LOG_TAG, "Угадай число. onCreate()");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        currentDifficulty = savedInstanceState != null ? savedInstanceState.getInt("currentDifficulty") : 2;
+        currentHint = savedInstanceState != null ? savedInstanceState.getString("currentHint") : getString(R.string.show_hint_label) + " " + currentDifficulty;
+
         showHint = findViewById(R.id.show_hint);
-        showHint.append(" ");
-        showHint.append(Integer.toString(2));
+        showHint.setText(currentHint);
+
+        currentAttempts = savedInstanceState != null ? savedInstanceState.getInt("currentAttempts") : maxAttempts;
 
         showAttemptsLeft = findViewById(R.id.show_attempts_left);
         showAttemptsLeft.append(" ");
-        showAttemptsLeft.append(Integer.toString(maxAttempts));
+        showAttemptsLeft.append(Integer.toString(currentAttempts));
 
         showPlayerName = findViewById(R.id.show_player_name);
         showPlayerName.append(" ");
-        showPlayerName.append(currentPlayerName);
+        showPlayerName.append(savedInstanceState != null ? savedInstanceState.getString("currentPlayerName") : currentPlayerName);
 
         editNum = findViewById(R.id.edit_num);
         btnGuess = findViewById(R.id.btn_guess);
         btnRestart = findViewById(R.id.btn_restart);
-        Button btnSettings = findViewById(R.id.btn_settings);
 
-        currentAttempts = maxAttempts;
-
-        hiddenNumber = NumberGenerator.generate(10, 99);
+        hiddenNumber = savedInstanceState != null ? savedInstanceState.getInt("hiddenNumber") : NumberGenerator.generate(10, 99);
 
         ActivityResultLauncher<Intent> playerNameActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -97,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
                     sendEndGameResult(true);
                 }
                 else {
-                    showHint.setText(inputNumber > hiddenNumber ? R.string.show_hint_less_label : R.string.show_hint_greater_label);
+                    currentHint = inputNumber > hiddenNumber ? getString(R.string.show_hint_less_label) : getString(R.string.show_hint_greater_label);
+                    showHint.setText(currentHint);
+
                     currentAttempts--;
 
                     showAttemptsLeft.setText(R.string.show_attempts_left_label);
@@ -117,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnRestart.setOnClickListener(v -> {
-            showHint.setText(R.string.show_hint_label);
+            currentHint = getString(R.string.show_hint_label) + " " + currentDifficulty;
+            showHint.setText(currentHint);
 
             showAttemptsLeft.setText((R.string.show_attempts_left_label));
             showAttemptsLeft.append(" ");
@@ -129,44 +144,6 @@ public class MainActivity extends AppCompatActivity {
             hiddenNumber = NumberGenerator.generate(minNumber, maxNumber);
 
             btnGuess.setEnabled(true);
-        });
-
-        btnSettings.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setTitle(R.string.ab_settings);
-
-            builder.setNegativeButton(R.string.ab_btn_cancel, (dialog, id) -> { });
-
-            builder.setItems(R.array.diaps_array, (dialog, which) -> {
-                switch (which) {
-                    case 0:
-                        maxAttempts = 5;
-                        minNumber = 10;
-                        maxNumber = 99;
-                        break;
-                    case 1:
-                        maxAttempts = 7;
-                        minNumber = 100;
-                        maxNumber = 999;
-                        break;
-                    case 2:
-                        maxAttempts = 10;
-                        minNumber = 1000;
-                        maxNumber = 9999;
-                        break;
-                }
-
-                btnRestart.performClick();
-
-                showHint.setText(R.string.show_hint_label);
-                showHint.append(" ");
-                showHint.append(Integer.toString(which + 2));
-            });
-
-            builder.create();
-            builder.show();
-            editNum.setText("");
         });
     }
 
@@ -200,5 +177,125 @@ public class MainActivity extends AppCompatActivity {
 
         shareIntent = Intent.createChooser(sendIntent, null);
         startActivity(shareIntent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.i(LOG_TAG, "Угадай число. onSaveInstanceState()");
+
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("hiddenNumber", hiddenNumber);
+        outState.putInt("currentDifficulty", currentDifficulty);
+        outState.putInt("maxAttempts", maxAttempts);
+        outState.putInt("minNumber", minNumber);
+        outState.putInt("maxNumber", maxNumber);
+        outState.putInt("currentAttempts", currentAttempts);
+        outState.putString("currentHint", currentHint);
+        outState.putString("currentPlayerName", currentPlayerName);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        Log.i(LOG_TAG, "Угадай число. onRestoreInstanceState()");
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        minNumber = savedInstanceState.getInt("minNumber");
+        maxNumber = savedInstanceState.getInt("maxNumber");
+    }
+
+    @Override
+    protected void onStart() {
+        Log.i(LOG_TAG, "Угадай число. onStart()");
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.i(LOG_TAG, "Угадай число. onResume()");
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.i(LOG_TAG, "Угадай число. onRestart()");
+
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i(LOG_TAG, "Угадай число. onStop()");
+
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(LOG_TAG, "Угадай число. onDestroy()");
+
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.menu_settings) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(R.string.ab_settings);
+
+            builder.setNegativeButton(R.string.ab_btn_cancel, (dialog, id) -> { });
+
+            builder.setItems(R.array.diaps_array, (dialog, which) -> {
+                currentDifficulty = which + 2;
+
+                switch (which) {
+                    case 0:
+                        maxAttempts = 5;
+                        minNumber = 10;
+                        maxNumber = 99;
+                        break;
+                    case 1:
+                        maxAttempts = 7;
+                        minNumber = 100;
+                        maxNumber = 999;
+                        break;
+                    case 2:
+                        maxAttempts = 10;
+                        minNumber = 1000;
+                        maxNumber = 9999;
+                        break;
+                }
+
+                btnRestart.performClick();
+
+                showHint.setText(R.string.show_hint_label);
+                showHint.append(" ");
+                showHint.append(Integer.toString(which + 2));
+            });
+
+            builder.create();
+            builder.show();
+            editNum.setText("");
+        }
+        else if (itemId == R.id.menu_about) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setComponent(new ComponentName("by.bondarik.helloworld","by.bondarik.helloworld.MainActivity"));
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

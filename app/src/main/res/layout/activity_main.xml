@@ -1,91 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/walter_white_vertical"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/show_player_name"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/show_player_name_label"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF" />
+        android:layout_height="0dp">
 
-    <TextView
-        android:id="@+id/show_msg"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+
+            app:toolbarId="@+id/toolbar">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:isScrollContainer="false" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@android:dimen/thumbnail_height"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/show_msg_label"
-        android:textAlignment="center"
-        android:textColor="#00B8D4"
-        android:textSize="28sp" />
+        android:layout_height="match_parent"
+        android:background="@drawable/walter_white_vertical"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/show_hint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/show_hint_label"
-        android:textAlignment="center"
-        android:textColor="#64DD17"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/show_player_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_player_name_label"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/show_attempts_left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/show_attempts_left_label"
-        android:textColor="#D50000"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/show_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@android:dimen/thumbnail_height"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/show_msg_label"
+            android:textAlignment="center"
+            android:textColor="#00B8D4"
+            android:textSize="28sp" />
 
-    <EditText
-        android:id="@+id/edit_num"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/et_edit_label"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:selectAllOnFocus="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#BFFFFFFF" />
+        <TextView
+            android:id="@+id/show_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/show_hint_label"
+            android:textAlignment="center"
+            android:textColor="#64DD17"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btn_guess"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_margin="5dp"
-        android:backgroundTint="#555555"
-        android:text="@string/btn_guess_label"
-        app:rippleColor="#7E7E7E" />
+        <TextView
+            android:id="@+id/show_attempts_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/show_attempts_left_label"
+            android:textColor="#D50000"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/btn_restart"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_margin="5dp"
-        android:backgroundTint="#555555"
-        android:text="@string/btn_restart_label" />
+        <EditText
+            android:id="@+id/edit_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/et_edit_label"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:selectAllOnFocus="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#BFFFFFFF" />
 
-    <Button
-        android:id="@+id/btn_settings"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_margin="5dp"
-        android:backgroundTint="#555555"
-        android:text="@string/btn_settings_label" />
+        <Button
+            android:id="@+id/btn_guess"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="#555555"
+            android:text="@string/btn_guess_label"
+            app:rippleColor="#7E7E7E" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_restart"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="#555555"
+            android:text="@string/btn_restart_label" />
+
+    </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

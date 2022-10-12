@@ -20,4 +20,5 @@
     <string name="ab_item_3">3-значные</string>
     <string name="ab_item_4">4-значные</string>
     <string name="show_player_name_label">Игрок:</string>
+    <string name="about_label">Об авторе</string>
 </resources>

@@ -19,4 +19,5 @@
     <string name="ab_item_3">3-digits</string>
     <string name="ab_item_4">4-digits</string>
     <string name="show_player_name_label">Player:</string>
+    <string name="about_label">About author</string>
 </resources>
