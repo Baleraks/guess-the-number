@@ -21,4 +21,7 @@
     <string name="ab_item_4">4-значные</string>
     <string name="show_player_name_label">Игрок:</string>
     <string name="about_label">Об авторе</string>
+    <string name="context_menu_color_red_label">Красный</string>
+    <string name="context_menu_color_green">Зелёный</string>
+    <string name="notification_content">Давно тебя не было в Уличных Гонках! Заходи!</string>
 </resources>

@@ -4,15 +4,25 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView showHint;
     private TextView showAttemptsLeft;
     private TextView showPlayerName;
+    private TextView showGuess;
 
     private EditText editNum;
 
@@ -68,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         showPlayerName = findViewById(R.id.show_player_name);
         showPlayerName.append(" ");
         showPlayerName.append(savedInstanceState != null ? savedInstanceState.getString("currentPlayerName") : currentPlayerName);
+
+        showGuess = findViewById(R.id.show_msg);
+        registerForContextMenu(showGuess);
 
         editNum = findViewById(R.id.edit_num);
         btnGuess = findViewById(R.id.btn_guess);
@@ -144,6 +158,22 @@ public class MainActivity extends AppCompatActivity {
             hiddenNumber = NumberGenerator.generate(minNumber, maxNumber);
 
             btnGuess.setEnabled(true);
+
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            Notification.Builder builder = new Notification.Builder(this);
+            builder.setContentTitle("Walter White")
+                    .setContentText(getString(R.string.notification_content))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.ic_walter_white_notification)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+
+            NotificationChannel channel = new NotificationChannel("1","waltuh_channel", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setShowBadge(true);
+            manager.createNotificationChannel(channel);
+            builder.setChannelId("1");
+
+            Notification notification = builder.build();
+            manager.notify(1, notification);
         });
     }
 
@@ -297,5 +327,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.menu_color_green) {
+            showGuess.setTextColor(Color.GREEN);
+        }
+        else if (itemId == R.id.menu_color_red) {
+            showGuess.setTextColor(Color.RED);
+        }
+
+        return super.onContextItemSelected(item);
     }
 }

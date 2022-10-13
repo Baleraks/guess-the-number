@@ -20,4 +20,7 @@
     <string name="ab_item_4">4-digits</string>
     <string name="show_player_name_label">Player:</string>
     <string name="about_label">About author</string>
+    <string name="context_menu_color_red_label">Red</string>
+    <string name="context_menu_color_green">Green</string>
+    <string name="notification_content">You haven\'t been in Street Racing for a long time! Come in!</string>
 </resources>
